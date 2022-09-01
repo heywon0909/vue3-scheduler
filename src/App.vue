@@ -50,7 +50,7 @@
   </div>
   <div class="flex-1">
     <div class="flex h-screen">
-      <div class="flex-1 border-r border-gray-300">
+      <div class="flex-1 border-r border-gray-300 overflow-y-auto">
       <div class="flex flex-col">
        <div class="border-b border-gray-300 mt-10 font-bold text-lg px-2">
         P.L.A.N
@@ -64,6 +64,17 @@
             </div>
           </div>
         </div>
+        </div>
+        <div class="flex flex-1 flex-col -mt-5">
+          <div class="flex ml-1 px-2 border-b border-gray-100 mb-6 py-3" v-for="todo in 10" :key="todo">
+          <input type="checkbox"/>
+          <div class="ml-3 font-bold text-lg">
+            <span>1</span>
+            <span>.</span>
+          </div>
+          <div class="text-blue-500 ml-3 font-bold">react 공부하기</div>
+          </div>
+          
         </div>
       </div>
       <div class="w-1/3">
