@@ -6,7 +6,7 @@
           <i class="fas fa-paw text-3xl fa-fw text-blue-800 ml-4"></i>
           <span class="ml-2 text-2xl hidden lg:inline-block">study</span>
         </div>
-        <div class="-ml-2 py-3 w-full mb-3 flex flex-col items-center border border-gray-300 rounded-lg">
+        <div class="-ml-2 px-3 py-3 w-full mb-3 flex flex-col items-center border border-gray-300 rounded-lg">
           <img src="http://picsum.photos/100" alt="" class="lg:w-40 h-50 mt-3"/>
         <button class="mt-3   h-20 px-3 flex items-center">
          
