@@ -1,13 +1,13 @@
 <template>
   <div class="flex h-screen">
-    <div class="w-1/6  ml-20 pt-5 flex flex-col justify-between border-r border-blue-80">
+    <div class="w-1/5  ml-40 pt-5 flex flex-col justify-between border-r border-blue-80">
       <div>
         <div class="pb-3 w-full flex flex-col lg:inline-block lg:items-start items-center pr-3 mb-6 border-b border-gray-300">
           <i class="fas fa-paw text-3xl fa-fw text-blue-800 ml-4"></i>
           <span class="ml-2 text-2xl hidden lg:inline-block">study</span>
         </div>
-        <div class="-ml-2 w-full mb-3 flex flex-col items-center border border-gray-300 rounded-lg">
-          <img src="http://picsum.photos/100" alt="" class="w-full  lg:w-40 h-50 mt-3"/>
+        <div class="-ml-2 py-3 w-full mb-3 flex flex-col items-center border border-gray-300 rounded-lg">
+          <img src="http://picsum.photos/100" alt="" class="lg:w-40 h-50 mt-3"/>
         <button class="mt-3   h-20 px-3 flex items-center">
          
          <div class="flex flex-col items-start">
@@ -49,9 +49,30 @@
     
   </div>
   <div class="flex-1">
-    <div class="border-b border-gray-300 w-full mt-9">
-      <span class="text-2xl font-bold ml-3">P.L.A.N</span>
+    <div class="flex h-screen">
+      <div class="flex-1 border-r border-gray-300">
+      <div class="flex flex-col">
+       <div class="border-b border-gray-300 mt-10 font-bold text-lg px-2">
+        P.L.A.N
+        </div>
+        <div class="flex px-2 py-3 border-b-8 mb-10">
+          <img src="https://picsum.photos/200" alt="" class="w-10 h-10 rounded-full hover:opacity-80"/>
+          <div class="flex flex-1 flex-col">
+            <textarea class="focus:outline-none resize-none w-full text-lg text-gray-300 font-bold px-2" placeholder="오늘의 study 일정은?"></textarea>
+            <div class="text-right">
+              <button class="bg-blue-800 text-white rounded-full text-sm px-4 py-2 hover:opacity-80">추가하기</button>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="w-1/3">
+        실천일수
+      </div>
     </div>
+    <!-- <div class="border-b border-gray-300 w-full mt-9">
+      <span class="text-2xl font-bold ml-3">P.L.A.N</span>
+    </div> -->
   </div>
   </div>
 </template>
