@@ -1,20 +1,20 @@
 <template>
-  <div class="flex h-screen">
-    <div class="w-1/5  ml-40 pt-5 flex flex-col justify-between border-r border-blue-80">
+  <div class="flex h-screen container mx-auto">
+    <div class="w-1/5  pt-5 flex flex-col justify-between border-r border-blue-80">
       <div>
         <div class="pb-3 w-full flex flex-col lg:inline-block lg:items-start items-center pr-3 mb-6 border-b border-gray-300">
           <i class="fas fa-paw text-3xl fa-fw text-blue-800 ml-4"></i>
           <span class="ml-2 text-2xl hidden lg:inline-block">study</span>
         </div>
-        <div class="-ml-2 px-3 py-3 w-full mb-3 flex flex-col items-center border border-gray-300 rounded-lg">
-          <img src="http://picsum.photos/100" alt="" class="lg:w-40 h-50 mt-3"/>
+        <div class="lg:-ml-2 px-3 py-3 lg:w-full w-45 mb-3 flex flex-col items-center lg:border border-gray-300 rounded-lg">
+          <img src="http://picsum.photos/100" alt="" class="lg:w-40 h-50 mt-3 rounded-sm hover:opacity-80"/>
         <button class="mt-3   h-20 px-3 flex items-center">
          
          <div class="flex flex-col items-start">
-          <div class="text-sm font-bold hidden lg:block">박혜원</div>
+          <div class="text-sm font-bold -mt-10 lg:mt-0">박혜원</div>
           <div class="text-sm text-gray-500 hidden lg:block">hw7319@naver.com</div>
          </div>
-         <i class="fas fa-ellipsis-h fa-fw text-2xl ml-auto text-sm "></i>
+         <i class="fas fa-ellipsis-h fa-fw text-2xl ml-auto text-sm hidden lg:inline-block"></i>
         </button>
       </div>
     <div class="flex flex-col lg:items-start items-center">
@@ -77,25 +77,7 @@
           
         </div>
       </div>
-      <div class="hidden lg:w-1/3 lg:block px-2 py-2">
-        <div class="rounded-xl flex flex-col w-full">
-        <div class="mt-5 px-4 py-2 bg-gray-100 flex items-center justify-between border-b border-gray-300">
-          <span class="font-bold text-lg">나의 공부 순위(지난달)</span>
-          <i class="fas fa-search"></i>
-        </div>
-        <div class="bg-gray-100 px-4 py-2 hover:bg-gray-200" v-for="rank in 5" :key="rank">
-          <div class="flex flex-1 justify-between items-center">
-            <div class="text-xl fond-bold bg-blue-400 w-12 h-12 rounded-full py-3 px-2 text-white">1위</div>
-            <div class= "text-xl ml-3">javascript</div>
-            <div class="text-xl text-gray-500">80%</div>
-          </div>
-        </div>
-        <div class="bg-gray-100 px-4 py-2  hover:bg-gray-200 flex justify-between">
-          <div class="font-bold">더보기</div>
-          <i class="fas fa-ellipsis-h"></i>
-        </div>
-      </div>
-      </div>
+       <StatisticNav/>
     </div>
     <!-- <div class="border-b border-gray-300 w-full mt-9">
       <span class="text-2xl font-bold ml-3">P.L.A.N</span>
@@ -105,8 +87,12 @@
 </template>
 
 <script>
-export default {
+import StatisticNav from './components/StatisticNav.vue'
 
+export default {
+  components: {
+    StatisticNav
+}
 }
 </script>
 
