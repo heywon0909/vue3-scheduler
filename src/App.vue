@@ -66,13 +66,18 @@
         </div>
         </div>
         <div class="flex flex-1 flex-col -mt-5">
-          <div class="flex ml-1 px-2 border-b border-gray-100 mb-6 py-3" v-for="todo in 10" :key="todo">
-          <input type="checkbox"/>
+          <div class="flex ml-1 px-2 border-b border-gray-100 mb-6 py-3 justify-between" v-for="todo in 10" :key="todo">
+          <!-- <input type="checkbox"/> -->
           <div class="ml-3 font-bold text-lg">
             <span>1</span>
             <span>.</span>
+            <span class="text-blue-500 ml-3 font-bold">react 공부하기</span>
           </div>
-          <div class="text-blue-500 ml-3 font-bold">react 공부하기</div>
+          
+          <div>
+            <button class="bg-green-400 rounded-md text-white px-3 py-1 text-sm">완료</button>
+            <button class="bg-blue-400 rounded-md text-white px-3 py-1 text-sm ml-3">삭제</button>
+          </div>
           </div>
           
         </div>
