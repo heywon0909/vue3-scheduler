@@ -5,7 +5,7 @@
           <span class="font-bold text-lg">나의 공부 순위(지난달)</span>
           <i class="fas fa-search"></i>
         </div>
-        <div class="bg-gray-100 px-4 py-2 hover:bg-gray-200" v-for="rank in 5" :key="rank">
+        <div class="bg-gray-100 px-4 py-2 hover:bg-gray-200" v-for="rank in 7" :key="rank">
           <div class="flex flex-1 justify-between items-center">
             <div class="text-xl fond-bold bg-blue-400 w-12 h-12 rounded-full py-3 px-2 text-white">1위</div>
             <div class= "text-xl ml-3">javascript</div>
@@ -18,7 +18,7 @@
         </div>
         </div>
         
-        <div class="flex flex-col w-full mt-10">
+        <!-- <div class="flex flex-col w-full mt-10">
           <div class="font-bold text-xl px-4 border-b border-gray-400">오늘의 완료된 study</div>
           <div class="px-4 flex items-center" v-for="mission in 7" :key="mission">
             <i class="fas fa-check-circle text-2xl text-green-600 px-2 py-2"></i>
@@ -31,7 +31,7 @@
           </div>
             <i class="fas fa-ellipsis-h cursor-pointer"></i>
            </div>
-        </div>
+        </div> -->
 
         
       </div>

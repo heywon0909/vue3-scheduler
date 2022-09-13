@@ -8,14 +8,14 @@
         </div>
         <div class="lg:-ml-2 px-3 py-3 lg:w-full w-45 mb-3 flex flex-col items-center lg:border border-gray-300 rounded-lg">
           <img src="http://picsum.photos/100" alt="" class="lg:w-40 h-50 mt-3 rounded-sm hover:opacity-80"/>
-        <button class="mt-3   h-20 px-3 flex items-center">
+            <button class="mt-3   h-20 px-3 flex items-center">
          
          <div class="flex flex-col items-start">
           <div class="text-sm font-bold -mt-10 lg:mt-0">박혜원</div>
           <div class="text-sm text-gray-500 hidden lg:block">hw7319@naver.com</div>
          </div>
          <i class="fas fa-ellipsis-h fa-fw text-2xl ml-auto text-sm hidden lg:inline-block"></i>
-        </button>
+          </button>
       </div>
     <div class="flex flex-col lg:items-start items-center">
       <div class="px-4 py-2 hover:bg-gray-300 rounded-full hover:text-blue-800">
@@ -48,55 +48,15 @@
     </div>  
     
   </div>
-  <div class="flex-1">
-    <div class="flex h-screen">
-      <div class="flex-1 border-r border-gray-300 overflow-y-auto">
-      <div class="flex flex-col">
-       <div class="border-b border-gray-300 mt-10 font-bold text-lg px-2">
-        P.L.A.N
-        </div>
-        <div class="flex px-2 py-3 border-b-8 mb-10">
-          <img src="https://picsum.photos/200" alt="" class="w-10 h-10 rounded-full hover:opacity-80"/>
-          <div class="flex flex-1 flex-col">
-            <textarea class="focus:outline-none resize-none w-full text-lg text-gray-300 font-bold px-2" placeholder="오늘의 study 일정은?"></textarea>
-            <div class="text-right">
-              <button class="bg-blue-800 text-white rounded-full text-sm px-4 py-2 hover:opacity-80">추가하기</button>
-            </div>
-          </div>
-        </div>
-        </div>
-        <div class="flex flex-1 flex-col -mt-5">
-          <div class="flex ml-1 px-2 border-b border-gray-100 mb-6 py-3 justify-between" v-for="todo in 10" :key="todo">
-          <!-- <input type="checkbox"/> -->
-          <div class="ml-3 font-bold text-lg">
-            <span>1</span>
-            <span>.</span>
-            <span class="text-blue-500 ml-3 font-bold">react 공부하기</span>
-          </div>
-          
-          <div>
-            <button class="bg-green-400 rounded-md text-white px-3 py-1 text-sm">완료</button>
-            <button class="bg-blue-400 rounded-md text-white px-3 py-1 text-sm ml-3">삭제</button>
-          </div>
-          </div>
-          
-        </div>
-      </div>
-       <StatisticNav/>
-    </div>
-    <!-- <div class="border-b border-gray-300 w-full mt-9">
-      <span class="text-2xl font-bold ml-3">P.L.A.N</span>
-    </div> -->
-  </div>
+     <Calendar/>
   </div>
 </template>
 
 <script>
-import StatisticNav from './components/StatisticNav.vue'
-
+import Calendar from './pages/Calendar.vue'
 export default {
   components: {
-    StatisticNav
+    Calendar
 }
 }
 </script>
