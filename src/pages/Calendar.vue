@@ -22,14 +22,64 @@
             <div class="">SUN</div>
            </div>
          </div>
-         <div class="flex flex-1 justify-between mr-3 ml-3 px-3 border-b border-blue-80">
-            <div class="w-1/7 border-r border-blue-80">1</div>
-            <div class="w-1/7 border-r border-blue-80">2</div>
-            <div class="w-1/7 border-r border-blue-80">3</div>
-            <div class="w-1/7 border-r border-blue-80">4</div>
-            <div class="w-1/7 border-r border-blue-80">5</div>
-            <div class="w-1/7 border-r border-blue-80">6</div>
-            <div class="w-1/7 border-r border-blue-80">7</div>
+         <div class="flex justify-between  border-b border-blue-80" v-for="week in 4" :key="week">
+            <div class="w-full border-r border-blue-80">
+              <div class="text-right font-bold mr-2">1</div>
+              <div class="flex flex-col">
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+              </div>
+            </div>
+            <div class="w-full border-r border-blue-80">
+              <div class="text-right font-bold mr-2">2</div>
+              <div class="flex flex-col">
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+              </div>
+            </div>
+            <div class="w-full border-r border-blue-80">
+              <div class="text-right font-bold mr-2">3</div>
+              <div class="flex flex-col">
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+              </div>
+            </div>
+            <div class="w-full border-r border-blue-80">
+              <div class="text-right font-bold mr-2">4</div>
+            </div>
+            <div class="w-full border-r border-blue-80">
+              <div class="text-right font-bold mr-2">5</div>
+              <div class="flex flex-col">
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+              </div>
+            </div>
+            <div class="w-full border-r border-blue-80">
+              <div class="text-right font-bold mr-2">6</div>
+              <div class="flex flex-col">
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+              </div>
+            </div>
+            <div class="w-full border-r border-blue-80">
+              <div class="text-right font-bold mr-2">7</div>
+              <div class="flex flex-col">
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+                <div class="text-md">공부</div>
+              </div>
+            </div>
          </div>
        </div>
        
