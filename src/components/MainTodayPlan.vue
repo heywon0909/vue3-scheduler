@@ -2,7 +2,8 @@
  <div>
     <div class="flex flex-col">
           <div class="border-b border-gray-300 mt-10 font-bold text-lg px-2">
-            P.L.A.N
+            P.L.A.N 
+            <button class="bg-blue-800  px-3  rounded-full text-white text-sm" @click="onLogout()">logout</button>
           </div>
             <div class="flex px-2 py-3 border-b-8 mb-10">
                 <img src="https://picsum.photos/200" alt="" class="w-10 h-10 rounded-full hover:opacity-80"/>
@@ -33,9 +34,27 @@
 </template>
 
 <script>
+import { auth } from '../firebase';
+import router from '../router';
 export default {
+  setup() {
+    const onLogout = async () => {
+      try {
+        await auth.signOut().then(() => {
+          router.replace('/login');
+        })
+        
+      } catch (e) {
+        alert(e.message);
+      }
+    }
 
+    return {
+      onLogout
+    }
+  }
 }
+
 </script>
 
 <style>

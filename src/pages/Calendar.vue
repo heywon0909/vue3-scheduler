@@ -24,12 +24,17 @@
          </div>
          <div class="flex justify-between  border-b border-blue-80" v-for="week in 4" :key="week">
             <div class="w-full border-r border-blue-80">
-              <div class="text-right font-bold mr-2">1</div>
+              <div class="flex flex-1">
+              <div class="flex font-bold mr-2 hover:bg-blue-50 rounded-full w-8 h-8 justify-center items-center">1</div>
+              </div>
               <div class="flex flex-col">
                 <div class="text-md">공부</div>
                 <div class="text-md">공부</div>
                 <div class="text-md">공부</div>
                 <div class="text-md">공부</div>
+              </div>
+              <div class="text-right font-bold mr-2 lg:block hidden">
+                <span><i class="fas fa-ellipsis-h fa-fw text-xs"></i></span>
               </div>
             </div>
             <div class="w-full border-r border-blue-80">
