@@ -15,8 +15,8 @@
                   </div>
             </div>
         </div>
-      <div class="flex flex-1 flex-col -mt-5">
-          <div class="flex ml-1 px-2 border-b border-gray-100 mb-6 py-3 justify-between" v-for="todo in 10" :key="todo">
+      <div class="flex flex-1 flex-col -mt-5 overflow-y-scroll h-screen">
+          <div class="flex ml-1 px-2 border-b border-gray-100 mb-6 py-3 justify-between" v-for="todo in 20" :key="todo">
           <!-- <input type="checkbox"/> -->
           <div class="ml-3 font-bold text-lg">
             <span>1</span>
