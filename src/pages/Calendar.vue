@@ -28,7 +28,7 @@
               <div class="flex flex-1">
               <div class="flex font-bold mr-2 hover:bg-blue-50 rounded-full w-8 h-8 justify-center items-center">1</div>
               </div>
-              <div class="flex flex-col w-full" @mouseover="isListOpen = true" @mouseout="isListOpen = false">
+              <div class="flex flex-col w-full" @mouseover="isListOpen = true" @mouseout="isListOpen = false" >
                 <div class="text-md">공부</div>
                 <div class="text-md">공부</div>
                 <div class="text-md">공부</div>
@@ -48,7 +48,7 @@
                 공부
               </div>
             </div>
-            <div class="w-full border-r border-blue-80">
+            <div class="w-full border-r border-blue-80 hover:bg-gray-50">
               <div class="text-right font-bold mr-2">2</div>
               <div class="flex flex-col">
                 <div class="text-md">공부</div>

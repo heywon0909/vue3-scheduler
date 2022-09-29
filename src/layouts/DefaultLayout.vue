@@ -19,7 +19,7 @@
       </div>
     <div class="flex flex-col lg:items-start items-center">
      <template v-for="route in routes" :key="route">
-      <router-link :to="route.path" class="px-4 py-2 hover:bg-gray-300 rounded-full hover:text-blue-800" v-if="route.meta.isNav">
+      <router-link :to="route.path" :class="`px-4 py-2 hover:bg-gray-300 rounded-full hover:text-blue-800 ${router.currentRoute.value.name === route.name ? 'text-blue-800':''}`" v-if="route.meta.isNav">
             <i :class="route.icon"></i>
             <span class="text-lg ml-3 hidden lg:inline-block">{{route.title}}</span>
       </router-link>
@@ -49,9 +49,10 @@ export default {
     setup() {
         const routes = ref([])
         onBeforeMount(() => {
-            routes.value = router.options.routes
+          routes.value = router.options.routes
+          console.log(router.currentRoute.value);
         })
-        return { routes
+        return { routes,router
         }
     },
 }
