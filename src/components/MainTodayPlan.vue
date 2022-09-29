@@ -34,15 +34,20 @@
 </template>
 
 <script>
-import { auth } from '../firebase';
+import { onMounted } from 'vue';
+import { auth,} from '../firebase';
 import router from '../router';
+import store from '../store';
 export default {
   setup() {
+    onMounted(() => {
+      console.log(store.state.user);
+    })
     const onLogout = async () => {
       try {
-        await auth.signOut().then(() => {
-          router.replace('/login');
-        })
+        await auth.signOut();
+        store.commit('SET_LOGOUT');
+        await router.replace('/login');
         
       } catch (e) {
         alert(e.message);

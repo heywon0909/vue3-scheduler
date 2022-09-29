@@ -29,6 +29,7 @@ export default {
     const isLoading = ref(false)
 
     const onRegister = async () => {
+      if(!username.value || !password.value || !email.value) return alert('이름,비밀번호,이메일을 정확하게 입력해주세요.')
       try {
         isLoading.value = true;
         console.log(username.value, email.value, password.value)
@@ -47,7 +48,12 @@ export default {
         router.push('/login');
       } catch (e) {
         console.log('create user with email and password error:', e);
-        alert(e.message);
+        switch (e.code) {
+          case "auth/invalid-email": alert('잘못된 이메일 형식입니다.'); break;
+          case "auth/wrong-password": alert('비밀번호가 틀립니다.'); break;
+          case "auth/user-not-found": alert('등록되지 않은 이메일입니다.'); break;
+          default: alert(e.message); break;
+        }
       } finally {
         isLoading.value = false;
       }

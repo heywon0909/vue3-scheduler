@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 flex">
+  <div class="flex-1 flex relative">
        <div class="flex-1 w-full border-r border-blue-80">
         <div class="flex flex-col mt-5">
           <div class="w-full">
@@ -22,19 +22,30 @@
             <div class="">SUN</div>
            </div>
          </div>
-         <div class="flex justify-between  border-b border-blue-80" v-for="week in 4" :key="week">
-            <div class="w-full border-r border-blue-80">
+         <!-- v-for="week in 4" :key="week" -->
+         <div class="flex justify-between  border-b border-blue-80 w-full" >
+            <div class="w-full border-r border-blue-80 hover:bg-gray-50">
               <div class="flex flex-1">
               <div class="flex font-bold mr-2 hover:bg-blue-50 rounded-full w-8 h-8 justify-center items-center">1</div>
               </div>
-              <div class="flex flex-col">
+              <div class="flex flex-col w-full" @mouseover="isListOpen = true" @mouseout="isListOpen = false">
                 <div class="text-md">공부</div>
                 <div class="text-md">공부</div>
                 <div class="text-md">공부</div>
                 <div class="text-md">공부</div>
               </div>
+              <div  class="text-right font-bold mr-2 lg:hidden block">
+                <span>+4</span>
+              </div>
               <div class="text-right font-bold mr-2 lg:block hidden">
                 <span><i class="fas fa-ellipsis-h fa-fw text-xs"></i></span>
+                
+              </div>
+            </div>
+            <div class="absolute mt-7 bg-white shadow w-44 ml-2" v-if="isListOpen">
+              <div class="text-md" v-for="list in 20" :key="list" >
+                <span class="font-bold text-sm">1.</span>
+                공부
               </div>
             </div>
             <div class="w-full border-r border-blue-80">
@@ -98,12 +109,15 @@
 </template>
 
 <script>
-
-
+import { ref } from 'vue';
 export default {
-    components: {
-      
+  setup() {
+    const isListOpen = ref(false)
+
+    return {
+      isListOpen
     }
+  }
 }
 </script>
 

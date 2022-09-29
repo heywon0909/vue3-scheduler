@@ -17,23 +17,34 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import router from '../router';
-import { auth } from '../firebase';
+import { auth, USER_COLLECTION } from '../firebase';
+import store from '../store';
 export default {
   setup() {
     const email = ref('')
     const password = ref('')
     const isLoading = ref(false)
 
+    onMounted(() => {
+      console.log(store.state.user)
+    })
     const onLogin = async () => {
+      if (!email.value || !password.value) return alert('이메일과 비밀번호를 다시 입력해주세요');
       try {
         isLoading.value = true;
         console.log(email.value, password.value)
-        const credential = await auth.signInWithEmailAndPassword(email.value, password.value);
+        const {user} = await auth.signInWithEmailAndPassword(email.value, password.value);
         const token = await auth.currentUser?.getIdToken();
-        console.log('token', token);
-        console.log(credential);
+        // console.log('token', token);
+        // console.log(credential);
+        // const { user } = credential;
+        console.log('user', user);
+        const doc = await USER_COLLECTION.doc(user.uid).get()
+        console.log('doc', doc.data());
+
+        store.commit('SET_LOGIN', doc.data());
         router.replace('/');
       } catch (e) {
         switch (e.code) {
