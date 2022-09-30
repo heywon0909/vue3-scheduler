@@ -8,9 +8,10 @@
             <div class="flex px-2 py-3 border-b-8 mb-10">
                 <img src="https://picsum.photos/200" alt="" class="w-10 h-10 rounded-full hover:opacity-80"/>
                   <div class="flex flex-1 flex-col">
-                  <textarea class="focus:outline-none resize-none w-full text-lg text-gray-300 font-bold px-2" placeholder="오늘의 study 일정은?"></textarea>
+                  <input type="text" v-model="planType" placeholder="구분 값을 설정해주세요" class="border border-blue-50"/>
+                  <textarea v-model="planBody" class="focus:outline-none resize-none w-full text-lg text-gray-300 font-bold px-2" placeholder="오늘의 study 일정은?"></textarea>
                   <div class="text-right">
-                    <button class="bg-blue-800 text-white rounded-full text-sm px-4 py-2 hover:opacity-80">추가하기</button>
+                    <button class="bg-blue-800 text-white rounded-full text-sm px-4 py-2 hover:opacity-80" @click="onAddPlan()">추가하기</button>
                   </div>
                   </div>
             </div>
@@ -34,15 +35,49 @@
 </template>
 
 <script>
-import { onMounted } from 'vue';
-import { auth,} from '../firebase';
+import { onBeforeMount } from 'vue';
 import router from '../router';
 import store from '../store';
+import { auth, PLAN_COLLECTION } from '../firebase'
+import { ref, computed } from 'vue';
+import firebase from 'firebase';
 export default {
   setup() {
-    onMounted(() => {
-      console.log(store.state.user);
+    onBeforeMount(() => {
+      createPlan();
     })
+    const planBody = ref('')
+    const planType = ref('')
+    const currentUser = computed(() => store.state.user)
+    const createPlan = async () => {
+      console.log('타니');
+      const today = new Date();
+      const day = `${today.getFullYear()}-${today.getMonth() <10 ?`0${today.getMonth()}`: `${today.getMonth()}`}-${today.getDay()< 10 ? `0${today.getDay()}`:`${today.getDay()}`}`;
+      const doc = PLAN_COLLECTION.doc(day);
+      await doc.set({
+        uid: currentUser.value.uid,
+        todayPlans:[]
+      });
+    }
+    const onAddPlan = async () => {
+      const today = new Date();
+      const day = `${today.getFullYear()}-${today.getMonth() <10 ?`0${today.getMonth()}`: `${today.getMonth()}`}-${today.getDay()< 10 ? `0${today.getDay()}`:`${today.getDay()}`}`;
+      try {
+        const doc = PLAN_COLLECTION.doc(day)
+        const data = {
+          type: planType.value,
+          title: planBody.value,
+          complete: ''
+        }
+        await doc.set({
+          todayPlans: firebase.firestore.FieldValue.arrayUnion(data)
+        },{merge:true});
+        planType.value = "";
+        planBody.value = "";
+      } catch (e) {
+        console.log("계획을 올리는데 문제가 발생하였습니다.", e);
+      }
+    }
     const onLogout = async () => {
       try {
         await auth.signOut();
@@ -55,7 +90,7 @@ export default {
     }
 
     return {
-      onLogout
+      onLogout,onAddPlan,planBody,planType,createPlan
     }
   }
 }
