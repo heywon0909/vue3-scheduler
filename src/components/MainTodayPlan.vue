@@ -17,19 +17,7 @@
             </div>
         </div>
       <div class="flex flex-1 flex-col -mt-5 overflow-y-scroll h-screen">
-          <div class="flex ml-1 px-2 border-b border-gray-100 mb-6 py-3 justify-between" v-for="todo in 20" :key="todo">
-          <!-- <input type="checkbox"/> -->
-          <div class="ml-3 font-bold text-lg">
-            <span>1</span>
-            <span>.</span>
-            <span class="text-blue-500 ml-3 font-bold">react 공부하기</span>
-          </div>
-          
-          <div>
-            <button class="bg-green-400 rounded-md text-white px-3 py-1 text-sm">완료</button>
-            <button class="bg-blue-400 rounded-md text-white px-3 py-1 text-sm ml-3">삭제</button>
-          </div>
-          </div>          
+         <Plan  v-for="(todo,index) in planList" :key="index" :todo="todo" :index="index"/>
       </div>
  </div>
 </template>
@@ -41,37 +29,54 @@ import store from '../store';
 import { auth, PLAN_COLLECTION } from '../firebase'
 import { ref, computed } from 'vue';
 import firebase from 'firebase';
+import Plan from '../components/Plan.vue'
 export default {
+  components:{ Plan, Plan },
   setup() {
+    Array.splice
     onBeforeMount(() => {
-      createPlan();
-    })
+      console.log('store',store.state.todoList)
+
+      // store.commit('SET_FLAG', false);
+      // store.commit('SET_TODAY',[]);
+      if (!store.state.isTodayStudyStart) {
+        createPlan();
+      }
+          })
     const planBody = ref('')
     const planType = ref('')
+    const planList = computed(()=>store.state.todoList)
     const currentUser = computed(() => store.state.user)
+
     const createPlan = async () => {
-      console.log('타니');
+      console.log('타기')
       const today = new Date();
-      const day = `${today.getFullYear()}-${today.getMonth() <10 ?`0${today.getMonth()}`: `${today.getMonth()}`}-${today.getDay()< 10 ? `0${today.getDay()}`:`${today.getDay()}`}`;
+      const day = `${today.getFullYear()}-${today.getMonth()+1 <10 ?`0${today.getMonth()+1}`: `${today.getMonth()+1}`}-${today.getDate()< 10 ? `0${today.getDate()}`:`${today.getDate()}`}`;
       const doc = PLAN_COLLECTION.doc(day);
       await doc.set({
         uid: currentUser.value.uid,
-        todayPlans:[]
+        todayPlans: [],
+        year: today.getFullYear(),
+        month: today.getMonth() + 1 < 10 ? `0${today.getMonth() + 1}` : `${today.getMonth() + 1}`,
+        day: today.getDate()< 10 ? `0${today.getDate()}`:`${today.getDate()}`
       });
+      store.commit('SET_FLAG',true);
     }
     const onAddPlan = async () => {
       const today = new Date();
-      const day = `${today.getFullYear()}-${today.getMonth() <10 ?`0${today.getMonth()}`: `${today.getMonth()}`}-${today.getDay()< 10 ? `0${today.getDay()}`:`${today.getDay()}`}`;
+      const day = `${today.getFullYear()}-${today.getMonth()+1 <10 ?`0${today.getMonth()+1}`: `${today.getMonth()+1}`}-${today.getDate()< 10 ? `0${today.getDate()}`:`${today.getDate()}`}`;
       try {
         const doc = PLAN_COLLECTION.doc(day)
         const data = {
           type: planType.value,
           title: planBody.value,
+          created_at: Date.now(),
           complete: ''
         }
         await doc.set({
           todayPlans: firebase.firestore.FieldValue.arrayUnion(data)
-        },{merge:true});
+        }, { merge: true });
+        store.commit('SET_TODAY', data);
         planType.value = "";
         planBody.value = "";
       } catch (e) {
@@ -90,7 +95,7 @@ export default {
     }
 
     return {
-      onLogout,onAddPlan,planBody,planType,createPlan
+      onLogout,onAddPlan,planBody,planType,createPlan,planList
     }
   }
 }
