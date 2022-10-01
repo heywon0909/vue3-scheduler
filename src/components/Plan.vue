@@ -1,5 +1,5 @@
 <template>
-  <div class="flex ml-1 px-2 border-b border-gray-100 mb-6 py-3 justify-between" >
+  <div class="flex ml-1 px-2 border-b border-gray-100 py-3 justify-between  hover:bg-gray-50" >
           <!-- <input type="checkbox"/> -->
           <div class="ml-3">
             <span class="font-bold text-lg">{{index+1}}</span>
