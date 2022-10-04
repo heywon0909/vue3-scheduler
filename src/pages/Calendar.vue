@@ -7,26 +7,20 @@
           </div>
         </div>
          <div class="flex items-center justify-center mt-4">
-          <div class="text-gray-500 mr-2"> prev </div>
-          <div class="font-bold text-xl">2022.09</div>
+          <div class="text-gray-500 mr-2" @click="prevMonth()"> prev </div>
+          <div class="font-bold text-xl">{{year}}.{{month}}</div>
           <div class="text-gray-500 ml-2"> next </div>
          </div>
          <div class="flex items-center justify-center flex-1 border-b border-gray-80">
            <div class="flex-1 flex justify-between mr-3 ml-3 p-3">
-            <div class="">MON</div>
-            <div class="">TUE</div>
-            <div class="">WED</div>
-            <div class="">THU</div>
-            <div class="">FRI</div>
-            <div class="">SAT</div>
-            <div class="">SUN</div>
+            <div v-for="(week,index) in weekNames" class="flex ml-3" :key="index">{{week}}</div>
            </div>
          </div>
          <!-- v-for="week in 4" :key="week" -->
-         <div class="flex justify-between  border-b border-blue-80 w-full" >
-            <div class="w-full border-r border-blue-80 hover:bg-gray-50">
+         <div class="flex justify-between  border-b border-blue-80 w-full" v-for="(week,index) in monthOfDay()" :key="index+`123`">
+            <div class="w-full border-r border-blue-80 hover:bg-gray-50" v-for="(day,index) in week" :key="index+`44`">
               <div class="flex flex-1">
-              <div class="flex font-bold mr-2 hover:bg-blue-50 rounded-full w-8 h-8 justify-center items-center">1</div>
+              <div class="flex font-bold mr-2 hover:bg-blue-50 rounded-full w-8 h-8 justify-center items-center">{{day}}</div>
               </div>
               <div class="flex flex-col w-full" @mouseover="isListOpen = true" @mouseout="isListOpen = false" >
                 <div class="text-md">공부</div>
@@ -42,13 +36,13 @@
                 
               </div>
             </div>
-            <div class="absolute mt-7 bg-white shadow w-44 ml-2" v-if="isListOpen">
+            <!-- <div class="absolute mt-7 bg-white shadow w-44 ml-2" v-if="isListOpen">
               <div class="text-md" v-for="list in 20" :key="list" >
                 <span class="font-bold text-sm">1.</span>
                 공부
               </div>
-            </div>
-            <div class="w-full border-r border-blue-80 hover:bg-gray-50">
+            </div> -->
+            <!-- <div class="w-full border-r border-blue-80 hover:bg-gray-50">
               <div class="text-right font-bold mr-2">2</div>
               <div class="flex flex-col">
                 <div class="text-md">공부</div>
@@ -56,8 +50,8 @@
                 <div class="text-md">공부</div>
                 <div class="text-md">공부</div>
               </div>
-            </div>
-            <div class="w-full border-r border-blue-80">
+            </div> -->
+            <!-- <div class="w-full border-r border-blue-80">
               <div class="text-right font-bold mr-2">3</div>
               <div class="flex flex-col">
                 <div class="text-md">공부</div>
@@ -95,7 +89,7 @@
                 <div class="text-md">공부</div>
                 <div class="text-md">공부</div>
               </div>
-            </div>
+            </div> -->
          </div>
        </div>
        
@@ -109,13 +103,79 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref,onBeforeMount,computed } from 'vue';
 export default {
   setup() {
     const isListOpen = ref(false)
+    const weekNames = ref(['월요일','화요일','수요일','목요일','금요일','토요일','일요일'])
+    const date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth()+1;
+    const firstDay = computed(() => {
+      return new Date(year, month - 1, 1).getDay();
+    }) 
+    const lastDay = computed(() => { return new Date(year, month, 0).getDate() });
+    const prevMonth = () => {
+      console.log('클릭');
+      if (month === 1) { month = 12; year -= 1; 
+      } else { month -= 1; }
+      console.log('month', month);
+    }
+    const getPrevMonthDay = () => {
+      let prevMonth=0,prevYear=0;
+      if (month === 1) { prevMonth = 12; prevYear = year- 1; }
+      else { prevMonth = month - 1; }
+      const prevLastDay = new Date(prevYear, prevMonth, 0).getDate();
+      return prevLastDay
+    }
+    const countOfWeek = computed(()=>{return parseInt(((firstDay.value - 1)+lastDay.value) / 7)+ 1})
+
+    const monthOfDay =() => {
+      let day = 1;
+      console.log('get', typeof getPrevMonthDay())
+      console.log('first',typeof firstDay.value);
+      let prevDay = getPrevMonthDay() - firstDay.value+1;
+      let dayOfWeek = [];
+      let dates = [];
+      
+      
+       
+      for (let j = 0; j < countOfWeek.value; j++){
+        for (let i = 0; i < weekNames.value.length; i++){
+          
+            if(prevDay <= getPrevMonthDay()) {
+            dayOfWeek[i] = prevDay;
+            prevDay++;
+            } else {
+              if (day <= lastDay.value) {
+                dayOfWeek[i] = day;
+                day++;
+              } else {
+                day = 1;
+                dayOfWeek[i] = day;
+                day++;
+              }
+             
+          }
+        }
+        dates.push(dayOfWeek);
+        dayOfWeek = [];
+          
+          
+        }
+     
+      return dates;
+    }
+    
+    onBeforeMount(()=>{
+     
+      console.log('countOfWEEK', countOfWeek);
+      console.log('get', getPrevMonthDay());
+      console.log('prevDay', monthOfDay());
+    })
 
     return {
-      isListOpen
+      isListOpen, weekNames, onBeforeMount, getPrevMonthDay,monthOfDay,countOfWeek,year,month,prevMonth
     }
   }
 }
